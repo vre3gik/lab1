@@ -24,14 +24,23 @@ class ConsoleMenu:
         self.library = library
 
     def _show_books(self):
+        print("  Список книг:")
+        if not self.library.books:
+            print("  (пусто)")
+            return
         for b in self.library.books:
             print(" ", b)
 
     def _show_readers(self):
+        print("  Список читателей:")
+        if not self.library.readers:
+            print("  (пусто)")
+            return
         for r in self.library.readers:
             print(" ", r)
 
     def _add_book(self):
+        print("  Добавление книги")
         book_id = int(input("  id: "))
         title = input("  название: ")
         author = input("  автор: ")
@@ -39,39 +48,46 @@ class ConsoleMenu:
         print("  + добавлено")
 
     def _add_reader(self):
+        print("  Добавление читателя")
         reader_id = int(input("  id: "))
         name = input("  имя: ")
         self.library.add_reader(Reader(reader_id, name))
         print("  + добавлено")
 
     def _lend(self):
+        print("  Выдача книги")
         book_id = int(input("  book_id: "))
         reader_id = int(input("  reader_id: "))
         self.library.lend(book_id, reader_id)
         print("  + выдано")
 
     def _give_back(self):
+        print("  Возврат книги")
         book_id = int(input("  book_id: "))
         reader_id = int(input("  reader_id: "))
         self.library.give_back(book_id, reader_id)
         print("  + возвращено")
 
     def _save_json(self):
+        print("  Сохранение в JSON")
         path = input("  путь: ")
         JsonStorage.save(self.library, path)
         print("  + сохранено")
 
     def _load_json(self):
+        print("  Загрузка из JSON")
         path = input("  путь: ")
         self.library = JsonStorage.load(path)
         print("  + загружено")
 
     def _save_xml(self):
+        print("  Сохранение в XML")
         path = input("  путь: ")
         XmlStorage.save(self.library, path)
         print("  + сохранено")
 
     def _load_xml(self):
+        print("  Загрузка из XML")
         path = input("  путь: ")
         self.library = XmlStorage.load(path)
         print("  + загружено")
